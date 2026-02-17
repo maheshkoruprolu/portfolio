@@ -1,0 +1,15 @@
+
+> portfolio@0.0.0 build
+> vite build
+
+You are using Node.js 18.19.1. Vite requires Node.js version 20.19+ or 22.12+. Please upgrade your Node.js version.
+vite v7.3.1 building client environment for production...
+transforming...
+✓ 2127 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.95 kB │ gzip:   0.51 kB
+dist/assets/profile-qhRsrqy_.png  673.68 kB
+dist/assets/index-LNhDl8E-.css     45.09 kB │ gzip:   7.96 kB
+dist/assets/index-CMyCG4jz.js     408.15 kB │ gzip: 131.24 kB
+✓ built in 40.40s

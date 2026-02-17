@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+:root {
+  --primary: #6366f1;
+  --secondary: #4f46e5;
+  --background: #0a0a0c;
+  --surface: #121215;
+  --foreground: #f8fafc;
+  --muted: #94a3b8;
+  --border: #1e1e24;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --selection: rgba(99, 102, 241, 0.3);
+}
+
+.light-theme {
+  --background: #f1f5f9; /* Slate 100 */
+  --surface: #ffffff;
+  --foreground: #020617; /* Navy 950 */
+  --muted: #475569; /* Slate 600 */
+  --border: #cbd5e1; /* Slate 300 */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(99, 102, 241, 0.15);
+  --selection: rgba(99, 102, 241, 0.2);
+}
+
+@theme {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Outfit", sans-serif;
+  
+  --shadow-indigo: 0 0 40px rgba(99, 102, 241, 0.15);
+  --shadow-premium: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary;
+    font-family: var(--font-sans);
+  }
+}
+
+@utility container-ultimate {
+  @apply max-w-7xl mx-auto px-6 lg:px-12;
+}
+
+@utility section-padding {
+  @apply py-16 md:py-24;
+}
+
+@utility glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  @apply rounded-2xl shadow-premium transition-all duration-500;
+}
+
+@utility bento-card {
+  @apply glass-card p-8 overflow-hidden relative;
+  &:hover {
+    @apply border-primary/40 -translate-y-1;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2), 0 0 20px 0px rgba(99, 102, 241, 0.1);
+  }
+}
+
+@utility h-serif {
+  @apply font-serif italic tracking-tight;
+}
+
+@utility btn-signature {
+  @apply bg-primary text-white px-8 py-3 rounded-md font-semibold transition-all duration-300
+         hover:bg-secondary hover:shadow-lg hover:shadow-primary/20 active:scale-95 text-sm uppercase tracking-widest;
+}
+
+@utility glass-border {
+  @apply border border-white/5;
+}
+
+@utility text-precision {
+  @apply text-[10px] uppercase font-bold tracking-[0.3em] text-primary;
+}
+
+/* Mesh Gradient */
+@keyframes meshGradient {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(5%, 5%) scale(1.1); }
+  66% { transform: translate(-5%, 10%) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.mesh-glow {
+  animation: meshGradient 20s ease-in-out infinite;
+  will-change: transform;
+}
+/* Texture Pattern */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+/* Hide Scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
