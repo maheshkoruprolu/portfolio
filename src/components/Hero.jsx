@@ -1,48 +1,19 @@
-import React, { useRef } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
-import profileImg from '../assets/profile.png';
+import { motion } from 'framer-motion';
 import { smoothScroll } from '../utils/smoothScroll';
 
 const MagneticButton = ({ children, className, onClick, href, target, rel, download }) => {
-  const ref = useRef(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const springConfig = { damping: 15, stiffness: 150 };
-  const springX = useSpring(x, springConfig);
-  const springY = useSpring(y, springConfig);
-
-  const handleMouseMove = (e) => {
-    const { clientX, clientY } = e;
-    const { left, top, width, height } = ref.current.getBoundingClientRect();
-    const centerX = left + width / 2;
-    const centerY = top + height / 2;
-    const distanceX = clientX - centerX;
-    const distanceY = clientY - centerY;
-
-    x.set(distanceX * 0.3);
-    y.set(distanceY * 0.3);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   const Component = href ? motion.a : motion.button;
 
   return (
     <Component
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ x: springX, y: springY }}
-      className={className}
+      className={`${className} transition-transform hover:scale-105 active:scale-95`}
       onClick={onClick}
       href={href}
       target={target}
       rel={rel}
       download={download}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
     >
       {children}
     </Component>
@@ -62,7 +33,7 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
             className="flex-grow max-w-3xl order-2 lg:order-1"
           >
-            <h1 className="text-5xl md:text-8xl font-black mb-4 tracking-[-0.04em] leading-[1.0] text-foreground">
+            <h1 className="text-5xl md:text-8xl font-medium mb-4 tracking-[-0.04em] leading-[1.0] text-foreground">
                Kumar Mahesh <br />
               <span className="h-serif text-primary/90">- Koruprolu.</span>
             </h1>
@@ -123,11 +94,12 @@ const Hero = () => {
           >
             <div className="relative z-10 w-64 md:w-80 lg:w-[380px] rounded-2xl overflow-hidden aspect-[4/5] glass-card border-white/20 shadow-huge group">
               <img 
-                src={profileImg} 
+                src="/profile_final.png" 
                 alt="Mahesh Koruprolu" 
                 className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                onError={(e) => { e.target.src = '/profile.png'; }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-40" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-40" />
             </div>
 
             {/* Subtle Industrial Accents */}
